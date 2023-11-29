@@ -7,6 +7,7 @@ servers:
     description: "Employee API Server"
   - url: "https://localhost:7207/"
     description: "Contact API Server"
+
 paths:
   "/employee":
     get:
@@ -128,6 +129,8 @@ paths:
     get:
       tags:
         - "Contact"
+      servers:
+        - url: "https://localhost:7207/"
       responses:
         "200":
           description: "Success"
@@ -150,6 +153,8 @@ paths:
     post:
       tags:
         - "Contact"
+      servers:
+        - url: "https://localhost:7207/"
       requestBody:
         content:
           application/json:
@@ -185,6 +190,8 @@ paths:
     get:
       tags:
         - "Contact"
+      servers:
+        - url: "https://localhost:7207/"
       parameters:
         - name: "id"
           in: "path"
@@ -209,6 +216,8 @@ paths:
     put:
       tags:
         - "Contact"
+      servers:
+        - url: "https://localhost:7207/"
       parameters:
         - name: "id"
           in: "path"
@@ -250,6 +259,8 @@ paths:
     delete:
       tags:
         - "Contact"
+      servers:
+        - url: "https://localhost:7207/"
       parameters:
         - name: "id"
           in: "path"
@@ -293,4 +304,93 @@ components:
           type: "integer"
           format: "int32"
         dayOfWeek:
-      
+          $ref: "#/components/schemas/DayOfWeek"
+        dayOfYear:
+          type: "integer"
+          format: "int32"
+          readOnly: true
+        dayNumber:
+          type: "integer"
+          format: "int32"
+          readOnly: true
+      additionalProperties: false
+
+    DayOfWeek:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      type: "integer"
+      format: "int32"
+
+    Employee:
+      type: "object"
+      properties:
+        employeeId:
+          type: "integer"
+          format: "int32"
+        name:
+          type: "string"
+          nullable: true
+        age:
+          type: "integer"
+          format: "int32"
+        department:
+          type: "string"
+          nullable: true
+        experience:
+          type: "integer"
+          format: "int32"
+        bloodGroup:
+          type: "string"
+          nullable: true
+        fatherName:
+          type: "string"
+          nullable: true
+        isDeleted:
+          type: "boolean"
+        isActive:
+          type: "boolean"
+        dateOfCreated:
+          type: "string"
+          format: "date-time"
+        dateOfUpdated:
+          type: "string"
+          format: "date-time"
+        roles:
+          type: "string"
+          nullable: true
+        isSupervisor:
+          type: "boolean"
+        isManager:
+          type: "boolean"
+      additionalProperties: false
+
+    Contact:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        firstName:
+          type: "string"
+          nullable: true
+        lastName:
+          type: "string"
+          nullable: true
+        nickName:
+          type: "string"
+          nullable: true
+        age:
+          type: "integer"
+          format: "int32"
+        dateTimeCreated:
+          type: "string"
+          format: "date-time"
+        isDeleted:
+          type: "boolean"
+      additionalProperties: false
